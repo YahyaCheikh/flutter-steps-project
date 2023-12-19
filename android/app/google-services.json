@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "450772673983",
+    "project_id": "smart-formation-projet",
+    "storage_bucket": "smart-formation-projet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450772673983:android:a5e838619eb4c7a4d1ed0a",
+        "android_client_info": {
+          "package_name": "com.example.smart_formation_projet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzqNXxsvFen0j5YC678cYEH651IQB6_5Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
