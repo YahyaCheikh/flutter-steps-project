@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'firebase_options.dart';
-import 'steps/step1.dart';
+import 'list_hotels.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  LoginScreen(),
+      home:  ListHotels(),
     );
   }
 }
