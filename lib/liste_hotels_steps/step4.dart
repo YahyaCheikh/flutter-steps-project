@@ -1,4 +1,4 @@
-// Seoaration du wudget HotelCard
+// Separation du wudget HotelCard
 
 import 'package:flutter/material.dart';
 

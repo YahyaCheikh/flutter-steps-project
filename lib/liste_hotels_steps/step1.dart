@@ -24,30 +24,30 @@ class ListHotels extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: Colors.green[200],
                         borderRadius: BorderRadius.circular(8)),
-                    padding: EdgeInsets.symmetric(vertical: 6, horizontal: 6),
-                    child: Icon(Icons.hotel)),
-                title: Text("Hotel name 1"),
-                subtitle: Text("Hotel rating : 2.5"),
+                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+                    child: const Icon(Icons.hotel)),
+                title: const Text("Hotel name 1"),
+                subtitle: const Text("Hotel rating : 2.5"),
               ),
               ListTile(
                 leading: Container(
                     decoration: BoxDecoration(
                         color: Colors.green[200],
                         borderRadius: BorderRadius.circular(8)),
-                    padding: EdgeInsets.symmetric(vertical: 6, horizontal: 6),
-                    child: Icon(Icons.image)),
-                title: Text("Hotel name 2"),
-                subtitle: Text("Hotel rating : 5"),
+                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+                    child: const Icon(Icons.image)),
+                title: const Text("Hotel name 2"),
+                subtitle: const Text("Hotel rating : 5"),
               ),
               ListTile(
                 leading: Container(
                     decoration: BoxDecoration(
                         color: Colors.green[200],
                         borderRadius: BorderRadius.circular(8)),
-                    padding: EdgeInsets.symmetric(vertical: 6, horizontal: 6),
-                    child: Icon(Icons.holiday_village)),
-                title: Text("Hotel name 3"),
-                subtitle: Text("Hotel rating : 3.8"),
+                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+                    child: const Icon(Icons.holiday_village)),
+                title: const Text("Hotel name 3"),
+                subtitle: const Text("Hotel rating : 3.8"),
               )
             ],
           ),

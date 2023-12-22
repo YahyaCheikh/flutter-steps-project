@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'firebase_options.dart';
-import 'list_hotels.dart';
+import 'liste_hotels_steps/step1.dart';
+
+// import 'liste_hotels_steps/step7/screens/list_hotels_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,4 +1,4 @@
-// Add function to fetch hotels from firebase
+// Add function to fetch hotels from firebase, turn the screen statefull in order to be able to update it when, 
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

@@ -1,26 +1,47 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class ListHotels extends StatefulWidget {
-  const ListHotels({super.key});
+// Screen
+class ListHotels extends StatelessWidget {
+  ListHotels({super.key});
+  final HotelController _hotelController = HotelController();
 
   @override
-  State<ListHotels> createState() => _ListHotelsState();
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: SafeArea(
+        child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              title: const Text("Liste des hoteles"),
+              centerTitle: true,
+            ),
+            body: Obx(
+              () => _hotelController.isLoadingHotels.value
+                  ? const Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : ListView(
+                      children: _hotelController.hotels
+                          .map(
+                            (hotel) => HotelCard(
+                              hotel: hotel,
+                            ),
+                          )
+                          .toList()),
+            )),
+      ),
+    );
+  }
 }
 
-class _ListHotelsState extends State<ListHotels> {
-  bool isLodingHotels = false;
-  void setIsLoadingHotels(bool newValue) {
-    setState(() {
-      isLodingHotels = newValue;
-    });
-  }
-
-  List<Hotel> hotels = [];
-
-  Future<void> getHotelsFromFirebase() async {
-    setIsLoadingHotels(true);
-    hotels = [];
+// Service
+class HotelServices {
+  Future<List<Hotel>> getHotelsFromFirebase() async {
+    List<Hotel> hotels = [];
     try {
       QuerySnapshot<Map<String, dynamic>> querySnapshot =
           await FirebaseFirestore.instance.collection('hotels').get();
@@ -39,56 +60,38 @@ class _ListHotelsState extends State<ListHotels> {
         // Add the Hotel object to the list
         hotels.add(hotel);
       }
-      print("------------------------------------------------------");
-      print(hotels);
-      print("------------------------------------------------------");
-      setIsLoadingHotels(false);
+      return hotels;
     } catch (error) {
       print('Error fetching hotels: $error');
-      setIsLoadingHotels(false);
+      return [];
     }
-  }
-
-  @override
-  void initState() {
-    getHotelsFromFirebase();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            title: const Text("Liste des hoteles"),
-            centerTitle: true,
-          ),
-
-// --------------------------------- New -------------------------------
-          body: isLodingHotels
-              ? const Center(
-                  child: CircularProgressIndicator(),
-                )
-              : ListView(
-                  children: hotels
-                      .map(
-                        (hotel) => HotelCard(
-                          hotel: hotel,
-                        ),
-                      )
-                      .toList()),
-
-// --------------------------------- New -------------------------------
-        ),
-      ),
-    );
   }
 }
 
+//Controller
+class HotelController extends GetxController {
+  final HotelServices _hotelServices = HotelServices();
+  var isLoadingHotels = false.obs;
+  List<Hotel> hotels = [];
+
+  
+
+  void setIsLoadingHotels(bool newValue) {
+    isLoadingHotels.value = newValue;
+  }
+
+  Future<void> getHotels() async {
+    setIsLoadingHotels(true);
+    hotels = await _hotelServices.getHotelsFromFirebase();
+    setIsLoadingHotels(false);
+  }
+
+  HotelController(){
+    getHotels();
+  }
+}
+
+// Widget
 class HotelCard extends StatelessWidget {
   const HotelCard({
     super.key,
@@ -120,6 +123,7 @@ class HotelCard extends StatelessWidget {
   }
 }
 
+// Model
 class Hotel {
   final String hotelName;
   final double hotelRating;
@@ -130,18 +134,3 @@ class Hotel {
       required this.hotelRating,
       required this.imageUrl});
 }
-
-List<Hotel> hotels = [
-  Hotel(
-      hotelName: "Hotel name 1",
-      hotelRating: 2.5,
-      imageUrl: 'assetes/images/image_hotel_1.jpg'),
-  Hotel(
-      hotelName: "Hotel name 2",
-      hotelRating: 3.8,
-      imageUrl: 'assetes/images/image_hotel_2.jpg'),
-  Hotel(
-      hotelName: "Hotel name 3",
-      hotelRating: 4,
-      imageUrl: 'assetes/images/image_hotel_3.jpg'),
-];
